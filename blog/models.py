@@ -15,7 +15,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     
     slug = models.SlugField(
-        null = True,
+        null = False,
         unique_for_date = 'published',
     )
     
@@ -23,7 +23,7 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete = models.PROTECT,
         related_name = 'blog_posts',
-        null = True,
+        null = False,
     )
     status = models.CharField(
         max_length = 10,
