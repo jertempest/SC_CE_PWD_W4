@@ -14,9 +14,8 @@ class Post(models.Model):
     
     title = models.CharField(max_length=255)
     
-    slug = models.Slugfield(
+    slug = models.SlugField(
         null = True,
-        help_text = 'The date and time this article was published',
         unique_for_date = 'published',
     )
     
@@ -24,11 +23,12 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete = models.PROTECT,
         related_name = 'blog_posts',
-        null = True
+        null = True,
     )
     status = models.CharField(
         max_length = 10,
         choices = STATUS_CHOICES,
+        default = DRAFT,
         help_text = 'Set to "published" to make this post publicly visible',
     )
     
@@ -42,6 +42,7 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     prepopulated_fields = {'slug':('title,')}
+    
     class Meta:
         """
         sort by the 'created' field. The '-' prefix
@@ -51,6 +52,4 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
-    
-
     
