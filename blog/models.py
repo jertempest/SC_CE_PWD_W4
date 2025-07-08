@@ -9,6 +9,12 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        """
+        sort by the 'created' field. The '-' prefix
+        specifies to order in descending/reverse order. Otherwise, it will be in ascending order.
+        """
+        ordering = ['-created']
     def __str__(self):
         return self.title
     
