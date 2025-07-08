@@ -15,5 +15,8 @@ class PostAdmin(admin.ModelAdmin):
         'author__first_name',
         'author__last_name',
     )
+    list_filter = (
+        'status',
+    )
 
 admin.site.register(models.Post, PostAdmin)
