@@ -15,6 +15,11 @@ class PostAdmin(admin.ModelAdmin):
         'author__first_name',
         'author__last_name',
     )
+    
+    prepopulated_fields = {
+        'slug' : ('title',)
+    }
+    
     list_filter = (
         'status',
     )
