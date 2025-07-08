@@ -13,9 +13,12 @@ class Post(models.Model):
     ]
     
     title = models.CharField(max_length=255)
-    content = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    
+    slug = models.Slugfield(
+        null = True,
+        help_text = 'The date and time this article was published',
+        unique_for_date = 'published',
+    )
     
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -23,19 +26,22 @@ class Post(models.Model):
         related_name = 'blog_posts',
         null = True
     )
-    
     status = models.CharField(
         max_length = 10,
         choices = STATUS_CHOICES,
         help_text = 'Set to "published" to make this post publicly visible',
     )
     
+    content = models.TextField()
     published = models.DateTimeField(
         null = True,
         blank = True,
         help_text = 'The date & time this article was published'
     )
     
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    prepopulated_fields = {'slug':('title,')}
     class Meta:
         """
         sort by the 'created' field. The '-' prefix
