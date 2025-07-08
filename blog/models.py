@@ -30,6 +30,12 @@ class Post(models.Model):
         help_text = 'Set to "published" to make this post publicly visible',
     )
     
+    published = models.DateTimeField(
+        null = True,
+        blank = True,
+        help_text = 'The date & time this article was published'
+    )
+    
     class Meta:
         """
         sort by the 'created' field. The '-' prefix
