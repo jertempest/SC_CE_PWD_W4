@@ -18,3 +18,10 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete = models.Protect,
+        related_name = 'blog_posts',
+        null = True
+    )
+    
