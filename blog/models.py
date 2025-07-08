@@ -1,6 +1,6 @@
 from django.db import models
 
-class Post(models.Models):
+class Post(models.Model):
     """
     Represents a blog post
     """
