@@ -5,6 +5,13 @@ class Post(models.Model):
     """
     Represents a blog post
     """
+    DRAFT = 'draft'
+    PUBLISHED = 'published'
+    STATUS_CHOICES = [
+        (DRAFT, 'Draft'),
+        (PUBLISHED, 'Published')
+    ]
+    
     title = models.CharField(max_length=255)
     content = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -16,6 +23,13 @@ class Post(models.Model):
         related_name = 'blog_posts',
         null = True
     )
+    
+    status = models.CharField(
+        max_length = 10,
+        choices = STATUS_CHOICES,
+        help_text = 'Set to "published" to make this post publicly visible',
+    )
+    
     class Meta:
         """
         sort by the 'created' field. The '-' prefix
